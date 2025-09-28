@@ -12,16 +12,24 @@ namespace MN_3yuni_MAUI.MVVM.ViewModels
 {
     public partial class HomeVM : ObservableObject
     {
+        public HomeVM()
+        {
+            generateTestDate();
+        }
+        #region Properties
+
         [ObservableProperty]
         private User user;
 
         [ObservableProperty]
         private List<WalletTransaction> _transactions;
+        #endregion
 
-        public HomeVM()
-        {
-            generateTestDate();
-        }
+        #region Commands
+        #endregion
+
+        #region Methods
+
         public void generateTestDate()
         {
             user = new User
@@ -37,6 +45,12 @@ namespace MN_3yuni_MAUI.MVVM.ViewModels
                 Transactions.Add(item);
             }
         }
+        #endregion
+
+        #region Tasks
+
+
+        #endregion
 
     }
 
