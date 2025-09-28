@@ -3,11 +3,338 @@
     x:Class="MN_3yuni_MAUI.MVVM.Views.Home"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Home">
-    <VerticalStackLayout>
-        <Label
-            x:Name="text"
-            HorizontalOptions="Center"
-            VerticalOptions="Center" />
-    </VerticalStackLayout>
+    xmlns:converters="clr-namespace:MN_3yuni_MAUI.Converters"
+    xmlns:models="clr-namespace:Shared.Models;assembly=Shared"
+    xmlns:vm="clr-namespace:MN_3yuni_MAUI.MVVM.ViewModels"
+    x:DataType="vm:HomeVM">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:TransactionStatusToIconConverter x:Key="TransactionStatusIconConverter" />
+            <converters:TransactionStatusToColorConverter x:Key="TransactionStatusColorConverter" />
+            <converters:TransactionStatusToDescriptionConverter x:Key="TransactionStatusDescriptionConverter" />
+            <converters:TransactionStatusTextColorConverter x:Key="TransactionStatusTextColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid Background="{StaticResource BackgroundGray}" RowDefinitions="Auto,*">
+
+        <!--  ROW 0: Header + fixed-position wallet card  -->
+        <AbsoluteLayout
+            Grid.Row="0"
+            HeightRequest="300"
+            ZIndex="0">
+
+            <!--  header background (unchanged paths)  -->
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Path StrokeThickness="0">
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Offset="0.0" Color="{StaticResource PrimaryDark}" />
+                            <GradientStop Offset="1.0" Color="{StaticResource Primary}" />
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure IsClosed="True" StartPoint="0,220">
+                                <BezierSegment
+                                    Point1="180,160"
+                                    Point2="380,120"
+                                    Point3="750,40" />
+                                <LineSegment Point="750,0" />
+                                <LineSegment Point="0,0" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <!--  Secondary highlight wave  -->
+                <Path Opacity="0.55" StrokeThickness="0">
+                    <Path.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Offset="0.0" Color="{StaticResource PrimaryLight}" />
+                            <GradientStop Offset="1.0" Color="{StaticResource Primary}" />
+                        </LinearGradientBrush>
+                    </Path.Fill>
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure IsClosed="True" StartPoint="0,260">
+                                <BezierSegment
+                                    Point1="220,210"
+                                    Point2="480,160"
+                                    Point3="750,80" />
+                                <LineSegment Point="750,0" />
+                                <LineSegment Point="0,0" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+
+                <!--  greetings moved up slightly  -->
+                <StackLayout Padding="20,48,20,20" VerticalOptions="Start">
+                    <HorizontalStackLayout Spacing="12">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="44"
+                            HorizontalOptions="Start"
+                            Source="avatar10.png"
+                            VerticalOptions="Center"
+                            WidthRequest="44" />
+                        <VerticalStackLayout Spacing="-2">
+                            <Label
+                                FontSize="17"
+                                StyleClass="GreetingStyle"
+                                Text="Welcome back," />
+                            <Label StyleClass="NameStyle" Text="Ethan!" />
+                        </VerticalStackLayout>
+                        <Border
+                            Margin="120,0,0,0"
+                            HeightRequest="44"
+                            HorizontalOptions="End"
+                            StrokeShape="RoundRectangle 999"
+                            StrokeThickness="1"
+                            VerticalOptions="Start"
+                            WidthRequest="44"
+                            ZIndex="3">
+                            <Border.Stroke>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Offset="0" Color="#FFFFFF55" />
+                                    <GradientStop Offset="1" Color="#FFFFFF15" />
+                                </LinearGradientBrush>
+                            </Border.Stroke>
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Offset="0" Color="#FFFFFF22" />
+                                    <GradientStop Offset="1" Color="#FFFFFF10" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+
+                            <Border.Shadow>
+                                <Shadow
+                                    Brush="#000000"
+                                    Opacity="0.18"
+                                    Radius="16"
+                                    Offset="0,6" />
+                            </Border.Shadow>
+                            <Grid>
+                                <Image
+                                    Aspect="AspectFit"
+                                    HeightRequest="22"
+                                    HorizontalOptions="Center"
+                                    Source="bell.png"
+                                    VerticalOptions="Center"
+                                    WidthRequest="22" />
+                            </Grid>
+                        </Border>
+                    </HorizontalStackLayout>
+                </StackLayout>
+            </Grid>
+
+            <!--  card sits a bit higher  -->
+            <Border
+                AbsoluteLayout.LayoutBounds="0.5,1,0.9,132"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+                StrokeShape="RoundRectangle 25"
+                StrokeThickness="1"
+                TranslationY="-28"
+                ZIndex="2">
+                <Border.Stroke>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="Gray" />
+                        <GradientStop Offset="1" Color="LightGray" />
+                    </LinearGradientBrush>
+                </Border.Stroke>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="{StaticResource PrimaryDark}" />
+                        <GradientStop Offset="0.35" Color="#8f14f5" />
+                        <GradientStop Offset="1" Color="{StaticResource PrimaryLight}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Shadow>
+                    <Shadow
+                        Brush="#000000"
+                        Opacity="0.28"
+                        Radius="28"
+                        Offset="0,14" />
+                </Border.Shadow>
+
+                <Grid Padding="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        FontFamily="poppinbold"
+                        FontSize="13"
+                        Opacity="0.9"
+                        StyleClass="BalanceLabelStyle"
+                        Text="Available balance" />
+                    <HorizontalStackLayout Grid.Row="1">
+                        <Label
+                            Margin="0,4,0,0"
+                            FontFamily="poppinbold"
+                            StyleClass="BalanceAmountStyle"
+                            Text="$ 1221.33" />
+                        <Image
+                            Margin="150,0,0,0"
+                            Aspect="AspectFit"
+                            HeightRequest="30"
+                            HorizontalOptions="End"
+                            Source="wallet.png"
+                            VerticalOptions="End"
+                            WidthRequest="30" />
+                    </HorizontalStackLayout>
+
+                </Grid>
+            </Border>
+        </AbsoluteLayout>
+
+        <!--  ROW 1: Content area (buttons + list), pulled up  -->
+        <Grid
+            Grid.Row="1"
+            Margin="0,-14,0,0"
+            RowDefinitions="Auto,Auto,*">
+
+            <!--  buttons tighter to card  -->
+            <Grid
+                Grid.Row="0"
+                Margin="20,0,20,0"
+                ColumnDefinitions="*,*"
+                ColumnSpacing="12">
+                <Button
+                    Grid.Column="0"
+                    FontFamily="poppinbold"
+                    StyleClass="AddOrderButtonStyle"
+                    Text="➕ Add Order" />
+                <Button
+                    Grid.Column="1"
+                    FontFamily="poppinbold"
+                    StyleClass="TrackOrderButtonStyle"
+                    Text="🌀 Track Order" />
+            </Grid>
+
+            <!--  section header closer  -->
+            <Border
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Margin="20,10,20,16"
+                StrokeShape="RoundRectangle 22"
+                StrokeThickness="1">
+                <Border.Stroke>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#d478ff" />
+                        <GradientStop Offset="1" Color="#d478ff" />
+                    </LinearGradientBrush>
+                </Border.Stroke>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#FFFFFF" />
+                        <GradientStop Offset="1" Color="#F3EEFF" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.Shadow>
+                    <Shadow
+                        Brush="#000000"
+                        Opacity="0.12"
+                        Radius="20"
+                        Offset="0,8" />
+                </Border.Shadow>
+
+                <!--  Only header + list  -->
+                <Grid Padding="16" RowDefinitions="Auto,*">
+
+                    <!--  Header  -->
+                    <Grid
+                        Grid.Row="0"
+                        Margin="4,0,4,8"
+                        ColumnDefinitions="*,Auto">
+                        <Label
+                            FontFamily="poppinbold"
+                            FontSize="18"
+                            Text="Recent Activity"
+                            TextColor="{StaticResource Black}" />
+                        <Label
+                            Grid.Column="1"
+                            FontFamily="poppinbold"
+                            Text="View All"
+                            TextColor="{StaticResource PrimaryDark}"
+                            VerticalOptions="Center" />
+                    </Grid>
+
+                    <!--  List fills remaining space  -->
+                    <CollectionView
+                        Grid.Row="1"
+                        ItemsLayout="VerticalList"
+                        ItemsSource="{Binding Transactions}"
+                        VerticalOptions="Fill"
+                        VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:WalletTransaction">
+                                <Border
+                                    Margin="0,0,0,10"
+                                    BackgroundColor="#FFFFFF"
+                                    StrokeShape="RoundRectangle 16"
+                                    StrokeThickness="0"
+                                    StyleClass="ActivityItemStyle">
+                                    <Border.Shadow>
+                                        <Shadow
+                                            Brush="#000000"
+                                            Opacity="0.05"
+                                            Radius="10"
+                                            Offset="0,4" />
+                                    </Border.Shadow>
+
+                                    <Grid Padding="14" ColumnDefinitions="Auto,*,Auto">
+
+                                        <!--  Icon circle (converter-driven glyph)  -->
+                                        <Border
+                                            Grid.Column="0"
+                                            Margin="0,0,12,0"
+                                            BackgroundColor="{Binding Status, Converter={StaticResource TransactionStatusColorConverter}}"
+                                            HeightRequest="40"
+                                            StrokeShape="RoundRectangle 999"
+                                            StrokeThickness="0"
+                                            WidthRequest="40">
+                                            <Label
+                                                FontFamily="poppinbold"
+                                                FontSize="18"
+                                                HorizontalOptions="Center"
+                                                Text="{Binding Status, Converter={StaticResource TransactionStatusIconConverter}}"
+                                                TextColor="White"
+                                                VerticalOptions="Center" />
+                                        </Border>
+
+                                        <!--  Info  -->
+                                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                            <Label
+                                                FontFamily="poppinbold"
+                                                FontSize="16"
+                                                Text="{Binding Transaction_Type}"
+                                                TextColor="{StaticResource Black}" />
+                                            <Label
+                                                FontFamily="poppin"
+                                                FontSize="12"
+                                                Text="{Binding Status, Converter={StaticResource TransactionStatusDescriptionConverter}}"
+                                                TextColor="#888888" />
+                                        </VerticalStackLayout>
+
+                                        <!--  Amount  -->
+                                        <Label
+                                            Grid.Column="2"
+                                            FontFamily="poppinbold"
+                                            FontSize="16"
+                                            Text="{Binding Amount, StringFormat='{}{0:C}'}"
+                                            TextColor="{Binding Status, Converter={StaticResource TransactionStatusTextColorConverter}}"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
 </ContentPage>
