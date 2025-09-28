@@ -1,117 +1,200 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <!--  Base Colors  -->
-    <Color x:Key="PrimaryLight">#F0E6FF</Color>
+
+    <!--  COLORS  -->
+
     <Color x:Key="PrimaryDark">#6A3DFF</Color>
-    <Color x:Key="SecondaryLight">#E6F0FF</Color>
+    <Color x:Key="Primary">#7B4DFF</Color>
+    <Color x:Key="PrimaryLight">#BDA8FF</Color>
     <Color x:Key="AccentRed">#FF4D4D</Color>
-    <Color x:Key="AccentGreen">#4DAB4D</Color>
+
     <Color x:Key="BackgroundGray">#F5F5F7</Color>
     <Color x:Key="CardWhite">#FFFFFF</Color>
-    <Color x:Key="PendingColor">#FFE6E6</Color>
-    <Color x:Key="CompletedColor">#E6FFE6</Color>
-    <Color x:Key="FailedColor">#FFE6E6</Color>
-    <Color x:Key="CancelledColor">#FFE6E6</Color>
+    <Color x:Key="Black">#000000</Color>
 
-    <!--  Text Styles  -->
-    <Style TargetType="Label">
-        <Setter Property="FontFamily" Value="poppin" />
+
+    <!--  SHADOWS  -->
+
+    <Shadow
+        x:Key="ElevSm"
+        Brush="#000000"
+        Opacity="0.10"
+        Radius="10"
+        Offset="0,4" />
+    <Shadow
+        x:Key="ElevMd"
+        Brush="#000000"
+        Opacity="0.12"
+        Radius="20"
+        Offset="0,8" />
+    <Shadow
+        x:Key="ElevLg"
+        Brush="#000000"
+        Opacity="0.28"
+        Radius="28"
+        Offset="0,14" />
+
+
+    <!--  GRADIENTS  -->
+
+    <LinearGradientBrush x:Key="WalletCardGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#6C3BFF" />
+        <GradientStop Offset="0.65" Color="#b62ff5" />
+        <GradientStop Offset="1" Color="#ce70fa" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="WalletCardStrokeGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="{StaticResource Gray200}" />
+        <GradientStop Offset="1" Color="{StaticResource Gray400}" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SectionCardBg" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#FFFFFF" />
+        <GradientStop Offset="1" Color="#F3EEFF" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="SectionCardStroke" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#d478ff" />
+        <GradientStop Offset="1" Color="#d478ff" />
+    </LinearGradientBrush>
+
+    <!--  Tab label on the floating bar  -->
+    <Style Class="TabLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
+    <!--#region HomePage-->
 
-    <!--#region HomePage CONTROLLS-->
+
+    <!--  TYPO STYLES  -->
     <Style Class="GreetingStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
         <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryLight}" />
     </Style>
 
     <Style Class="NameStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="24" />
-        <Setter Property="TextColor" Value="#333333" />
         <Setter Property="FontFamily" Value="poppinbold" />
-    </Style>
-
-    <Style Class="SectionTitleStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property="TextColor" Value="#333333" />
-        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
     </Style>
 
     <Style Class="BalanceLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextColor" Value="#FFFFFF" />
-        <Setter Property="Opacity" Value="0.8" />
-        <Setter Property="FontFamily" Value="poppin" />
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
+        <Setter Property="Opacity" Value="0.9" />
     </Style>
 
     <Style Class="BalanceAmountStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="32" />
-        <Setter Property="TextColor" Value="#FFFFFF" />
         <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="28" />
+        <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
     </Style>
 
-    <Style Class="CardNumberStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="#FFFFFF" />
-        <Setter Property="Opacity" Value="0.8" />
-        <Setter Property="FontFamily" Value="poppin" />
-    </Style>
-
-    <!--  Button Styles  -->
-    <Style Class="AddOrderButtonStyle" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#F0E6FF" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
-        <Setter Property="CornerRadius" Value="12" />
-        <Setter Property="Padding" Value="15" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="HeightRequest" Value="60" />
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="HorizontalOptions" Value="Fill" />
-    </Style>
-
-    <Style Class="TrackOrderButtonStyle" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource CardWhite}" />
-        <Setter Property="TextColor" Value="#333333" />
-        <Setter Property="CornerRadius" Value="12" />
-        <Setter Property="Padding" Value="15" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="HeightRequest" Value="60" />
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="HorizontalOptions" Value="Fill" />
-        <Setter Property="BorderColor" Value="#DDDDDD" />
-        <Setter Property="BorderWidth" Value="1" />
-    </Style>
-
-    <!--  Activity Item Style  -->
-    <Style Class="ActivityItemStyle" TargetType="Border">
-        <Setter Property="BackgroundColor" Value="{StaticResource CardWhite}" />
-        <Setter Property="Stroke" Value="#EEEEEE" />
-        <Setter Property="StrokeThickness" Value="3" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 15" />
-        <Setter Property="Margin" Value="0,10,0,0" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="HeightRequest" Value="80" />
-    </Style>
-
-    <!--  Section Title with "View All"  -->
-    <Style Class="SectionTitleWithLinkStyle" TargetType="StackLayout">
-        <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="Spacing" Value="0" />
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="HorizontalOptions" Value="Fill" />
+    <Style Class="SectionTitleStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
     </Style>
 
     <Style Class="ViewAllLinkStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+        <Setter Property="FontFamily" Value="poppinbold" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+    </Style>
+
+    <!--  Circular icon chip (bell)  -->
+    <Style Class="IconChip" TargetType="Border">
+        <Setter Property="WidthRequest" Value="44" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 999" />
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Offset="0" Color="#FFFFFF22" />
+                <GradientStop Offset="1" Color="#FFFFFF10" />
+            </LinearGradientBrush>
+        </Setter>
+        <Setter Property="Stroke" Value="{StaticResource WalletCardStrokeGradient}" />
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
+    </Style>
+
+    <!--  Wallet card  -->
+    <Style Class="WalletCard" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 26" />
+        <Setter Property="Background" Value="{StaticResource WalletCardGradient}" />
+        <Setter Property="Stroke" Value="{StaticResource WalletCardStrokeGradient}" />
+        <Setter Property="Shadow" Value="{StaticResource ElevLg}" />
+        <Setter Property="Padding" Value="20" />
+    </Style>
+
+    <!--  Section wrapper (Recent Activity)  -->
+    <Style Class="SectionCard" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 22" />
+        <Setter Property="Background" Value="{StaticResource SectionCardBg}" />
+        <Setter Property="Stroke" Value="{StaticResource SectionCardStroke}" />
+        <Setter Property="Shadow" Value="{StaticResource ElevMd}" />
+        <Setter Property="Padding" Value="16" />
+    </Style>
+
+    <!--  Activity list item  -->
+    <Style Class="ActivityItemStyle" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Background" Value="#FFFFFF" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="Padding" Value="0" />
+    </Style>
+
+    <!--  Round icon bg in each row  -->
+    <Style Class="ActivityIconCircle" TargetType="Border">
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 999" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+    </Style>
+
+    <!--  Primary ghost card button (Add Order)  -->
+    <Style Class="AddOrderButtonStyle" TargetType="Button">
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Padding" Value="16,14" />
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+        <Setter Property="Background">
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Offset="0" Color="#EEE7FF" />
+                <GradientStop Offset="1" Color="#FFFFFF" />
+            </LinearGradientBrush>
+        </Setter>
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+    </Style>
+
+    <!--  Neutral outline button (Track Order)  -->
+    <Style Class="TrackOrderButtonStyle" TargetType="Button">
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Padding" Value="16,14" />
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+        <Setter Property="BackgroundColor" Value="#FFFFFF" />
+        <Setter Property="BorderColor" Value="#E6E1FF" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
     </Style>
 
     <!--#endregion-->
 
-
+    <!--#region OrdersPage-->
+    <!--  hon ziiiid anwaryoooooo  -->
+    <!--#endregion-->
 </ResourceDictionary>

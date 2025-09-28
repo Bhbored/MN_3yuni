@@ -21,7 +21,6 @@ namespace MN_3yuni_MAUI
                     fonts.AddFont("Poppins-Regular.ttf", "poppin");
                     fonts.AddFont("MauiMaterialAssets.ttf", "MaterialAssets");
                 });
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
