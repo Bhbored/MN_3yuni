@@ -15,7 +15,7 @@
         StrokeShape="RoundRectangle 28"
         StrokeThickness="1"
         VerticalOptions="Center"
-        WidthRequest="400">
+        WidthRequest="420">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                 <GradientStop Offset="0" Color="#ce70fa" />
@@ -64,12 +64,13 @@
             <!--  New (center FAB)  -->
             <Border
                 Grid.Column="2"
-                HeightRequest="56"
+                Margin="0,0,0,10"
+                HeightRequest="48"
                 HorizontalOptions="Center"
+                Stroke="{StaticResource Gray100}"
                 StrokeShape="RoundRectangle 999"
-                StrokeThickness="0"
-                VerticalOptions="Center"
-                WidthRequest="56">
+                StrokeThickness="1"
+                WidthRequest="48">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Offset="0" Color="#FFFFFF" />
