@@ -4,17 +4,136 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:MN_3yuni_MAUI.Controls"
-    Title="OrderPage"
+    Title="Orders"
     BackgroundColor="{StaticResource BackgroundGray}">
+
     <AbsoluteLayout>
+
+       
         <Grid
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
-            RowDefinitions="Auto,*" />
+            Margin="0,0,0,76">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+           
+            <VerticalStackLayout 
+                Grid.Row="0"
+                Margin="20,40,20,16"
+                Spacing="16">
+
+              
+                <HorizontalStackLayout Spacing="32">
+                    <Label 
+                        Text="Upcoming">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource SectionHeaderStyle}">
+                                <Setter Property="FontSize" Value="16" />
+                            </Style>
+                        </Label.Style>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsUpcomingSelected}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+                                <Setter Property="FontFamily" Value="poppinbold" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsUpcomingSelected}" Value="False">
+                                <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+                                <Setter Property="FontFamily" Value="poppinregular" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectUpcomingCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label 
+                        Text="Past Orders">
+                        <Label.Style>
+                            <Style TargetType="Label" BasedOn="{StaticResource SectionHeaderStyle}">
+                                <Setter Property="FontSize" Value="16" />
+                            </Style>
+                        </Label.Style>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsUpcomingSelected}" Value="False">
+                                <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+                                <Setter Property="FontFamily" Value="poppinbold" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsUpcomingSelected}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+                                <Setter Property="FontFamily" Value="poppinregular" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectPastCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+
+            <ScrollView Grid.Row="1" Margin="20,0,20,20">
+                <VerticalStackLayout Spacing="16" BindableLayout.ItemsSource="{Binding DisplayedOrders}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource OrderItemCard}">
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Path=BindingContext.GoToOrderDetailsCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" 
+                                        CommandParameter="{Binding}" />
+                                </Border.GestureRecognizers>
+                                <VerticalStackLayout Spacing="12" Padding="0,8">
+                                    <HorizontalStackLayout Spacing="8">
+                                        <Label 
+                                            Text="{Binding OrderNumber}" 
+                                            FontFamily="poppinbold" 
+                                            FontSize="18" 
+                                            TextColor="{StaticResource Black}" />
+                                        <Label 
+                                            Text="{Binding TotalPrice}" 
+                                            FontFamily="poppinbold" 
+                                            FontSize="18" 
+                                            TextColor="{StaticResource Primary}" 
+                                            HorizontalOptions="EndAndExpand" />
+                                    </HorizontalStackLayout>
+                                    <Label 
+                                        Text="{Binding RestaurantInfo}" 
+                                        Style="{StaticResource SubtextStyle}" />
+                                    <HorizontalStackLayout Style="{StaticResource DeliveryRow}">
+                                        <Image
+                                            Source="expressdelivery.png"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            Aspect="AspectFit"
+                                            Margin="0,0,12,0" />
+                                        <VerticalStackLayout VerticalOptions="Center">
+                                            <Label 
+                                                Text="{Binding Address}" 
+                                                Style="{StaticResource AddressLabelStyle}" 
+                                                LineBreakMode="TailTruncation" 
+                                                MaxLines="1" />
+                                            <Label 
+                                                Text="{Binding Status}" 
+                                                Style="{StaticResource SubtextStyle}" />
+                                        </VerticalStackLayout>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </ScrollView>
+
+        </Grid>
+
+        <!-- Floating Tab Bar -->
         <controls:FloatingTabBar
-            Margin="0,20,0,0"
             AbsoluteLayout.LayoutBounds="0.5,1,1,76"
             AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
-            ZIndex="1000" />
+            ZIndex="1000"
+            Margin="0,20,0,0" />
+
     </AbsoluteLayout>
 </ContentPage>

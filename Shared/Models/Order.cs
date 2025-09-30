@@ -12,7 +12,7 @@ namespace Shared.Models
         public long Id { get; set; }
         public long User_Id { get; set; }
         //public long? Assigned_Driver_Id { get; set; }
-        //public string OrderItem { get; set; } = "{}"; // JSON as string; map via Npgsql JSON later
+        public string OrderItem { get; set; } = "{}"; // JSON as string; map via Npgsql JSON later
         //public long? Category_Id { get; set; }
         //public WeightClass? Weight_Class { get; set; }
         //public decimal? Weight_Kg_Min { get; set; }

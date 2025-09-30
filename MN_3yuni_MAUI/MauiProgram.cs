@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MN_3yuni_MAUI.MVVM.ViewModels;
 using MN_3yuni_MAUI.MVVM.Views;
+using MN_3yuni_MAUI.DIExtension;
 
 namespace MN_3yuni_MAUI
 {
@@ -24,10 +25,8 @@ namespace MN_3yuni_MAUI
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-            //viewmodels
-            builder.Services.AddTransient<HomeVM>();
-            //views
-            builder.Services.AddTransient<Home>();
+
+            builder.Services.RegisterDependencies();
             return builder.Build();
         }
     }
