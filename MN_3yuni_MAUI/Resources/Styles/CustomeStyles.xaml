@@ -19,10 +19,7 @@
         <GradientStop Offset="1" Color="#b62ff5" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="Brush.CardBg" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Offset="0" Color="#FFFFFF" />
-        <GradientStop Offset="1" Color="#F3EEFF" />
-    </LinearGradientBrush>
+    <!--  SHADOWS  -->
 
     <!--  ===== Purple-tinted Shadows (closest to “gradient shadow” in MAUI) =====  -->
     <Shadow
@@ -175,4 +172,7 @@
 
     <!--#endregion-->
 
+    <!--#region OrdersPage-->
+    <!--  hon ziiiid anwaryoooooo  -->
+    <!--#endregion-->
 </ResourceDictionary>

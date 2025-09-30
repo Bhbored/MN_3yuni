@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MN_3yuni_MAUI.Controls"
+             x:Class="MN_3yuni_MAUI.MVVM.Views.OrderDetails"
+             Title="OrderDetails"
+             BackgroundColor="{StaticResource BackgroundGray}">
+
+
+    <AbsoluteLayout>
+       
+
+        <ScrollView
+            AbsoluteLayout.LayoutBounds="0,60,1,1"
+            AbsoluteLayout.LayoutFlags="WidthProportional,HeightProportional"
+            Margin="0,0,0,111">
+
+            <VerticalStackLayout Spacing="20" Padding="20">
+
+                
+                <Border Style="{StaticResource OrderItemCard}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding CurrentOrder.OrderNumber}" 
+                               FontSize="18" 
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource PrimaryDark}"/>
+                        <Label Text="{Binding CurrentOrder.RestaurantInfo}" 
+                               Style="{StaticResource SubtextStyle}"/>
+                        <Label Text="{Binding CurrentOrder.Status}" 
+                               FontSize="14"
+                               TextColor="{StaticResource Secondary}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- ORDER ITEMS -->
+                <Label Text="Order Items" TextColor="{StaticResource PrimaryDark}" FontAttributes="Bold"/>
+                <CollectionView
+    ItemsSource="{Binding OrderItems}"
+    SelectionMode="None"
+    VerticalOptions="Fill"
+    HorizontalOptions="Fill">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource OrderItemCard}">
+                                <Grid ColumnDefinitions="60,*,Auto" 
+                      ColumnSpacing="16" 
+                      VerticalOptions="Center"
+                      RowDefinitions="*"
+                      Padding="0">
+
+                                    <!-- Image -->
+                                    <Image 
+                        Source="{Binding ImageUrl, TargetNullValue='grocery_placeholder.png'}" 
+                        WidthRequest="60" 
+                        HeightRequest="60" 
+                        Aspect="AspectFill"
+                        Grid.Column="0"
+                        VerticalOptions="Center" />
+
+                                    <!-- Item Details -->
+                                    <VerticalStackLayout 
+                        Spacing="2" 
+                        VerticalOptions="Center" 
+                        Grid.Column="1"
+                        HorizontalOptions="Start">
+                                        <Label Text="{Binding Name}" Style="{StaticResource AddressLabelStyle}" />
+                                        <Label Text="{Binding QuantityAndPrice}" Style="{StaticResource SubtextStyle}" />
+                                    </VerticalStackLayout>
+
+                                    <!-- Price - Properly aligned to the right -->
+                                    <Label Text="{Binding DisplayTotal}" 
+                           Style="{StaticResource AddressLabelStyle}" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Grid.Column="2"
+                           Margin="0" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- DELIVERY DETAILS -->
+                <Label Text="Delivery Details" TextColor="{StaticResource PrimaryDark}" FontAttributes="Bold"/>
+                <Border Style="{StaticResource WhiteCard}">
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Style="{StaticResource DeliveryRow}">
+                            <Border Style="{StaticResource DeliveryIconCircle}">
+                                <Image Source="store.png" WidthRequest="32" HeightRequest="32" />
+                            </Border>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Pickup Location" Style="{StaticResource AddressLabelStyle}" />
+                                <Label Text="{Binding PickupAddress}" Style="{StaticResource SubtextStyle}" 
+                                       LineBreakMode="WordWrap" MaxLines="2"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+
+                        <Image 
+                            Grid.Row="1" 
+                            Grid.Column="0" 
+                            Source="direction.png" 
+                            WidthRequest="15" 
+                            HeightRequest="15"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Margin="0,0,-38,0" />
+
+                        <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Style="{StaticResource DeliveryRow}">
+                            <Border Style="{StaticResource DeliveryIconCircle}">
+                                <Image Source="homestore.png" WidthRequest="32" HeightRequest="32" />
+                            </Border>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Delivery Address" Style="{StaticResource AddressLabelStyle}" />
+                                <Label Text="{Binding DropoffAddress}" Style="{StaticResource SubtextStyle}" 
+                                       LineBreakMode="WordWrap" MaxLines="2"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- ORDER STATUS -->
+                <Label Text="Order Status" TextColor="{StaticResource PrimaryDark}" FontAttributes="Bold"/>
+                <Border Style="{StaticResource OrderItemCard}">
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto" VerticalOptions="Center" Padding="16">
+                        <Border Style="{StaticResource StatusIconCircle}" Grid.Column="0" VerticalOptions="Center">
+                            <Image Source="delivery.png" WidthRequest="32" HeightRequest="32" />
+                        </Border>
+
+                        <VerticalStackLayout 
+                            Grid.Column="1" 
+                            Spacing="2" 
+                            Margin="16,0"
+                            VerticalOptions="Center">
+                            <Label Text="{Binding StatusText}" Style="{StaticResource StatusTextStyle}" />
+                            <Label 
+                                Text="{Binding StatusDate}" 
+                                Style="{StaticResource StatusDateStyle}"
+                                LineBreakMode="WordWrap"
+                                MaxLines="2" />
+                        </VerticalStackLayout>
+
+                        <Button 
+                            Text="Track Order" 
+                            Style="{StaticResource TrackOrderButtonStyle}" 
+                            Grid.Column="2" 
+                            VerticalOptions="Center"
+                            Command="{Binding TrackOrderCommand}" />
+                    </Grid>
+                </Border>
+
+                <!-- ASSIGNED DRIVER -->
+                <Label Text="Assigned Driver" TextColor="{StaticResource PrimaryDark}" FontAttributes="Bold"/>
+                <Border Style="{StaticResource DriverCard}">
+                    <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="16" VerticalOptions="Center">
+
+                       
+                        <Image 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Grid.RowSpan="2"
+                        Source="user.png"
+                        WidthRequest="32" 
+                        HeightRequest="32" 
+                        Aspect="AspectFill" 
+                        VerticalOptions="Center" />
+
+                        
+                        <VerticalStackLayout 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Grid.RowSpan="2"
+                        Spacing="8"
+                        VerticalOptions="Center">   
+                            <Label Text="{Binding AssignedDriver.Name}" Style="{StaticResource DriverNameStyle}" />
+                            <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                <Image Source="star.png" WidthRequest="16" HeightRequest="16" />
+                                <Label Text="{Binding AssignedDriver.RatingDisplay}" Style="{StaticResource DriverReviewCountStyle}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+
+
+                        <HorizontalStackLayout 
+                        Grid.Row="0" 
+                        Grid.Column="2" 
+                        Grid.RowSpan="2"
+                        Spacing="8"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End">
+
+                            <!-- Chat Button -->
+                            <Border Style="{StaticResource IconButtonStyle}">
+                                <Image Source="chatorder.png" WidthRequest="20" HeightRequest="20">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ContactDriverCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Border>
+
+                            <!-- Phone Button -->
+                            <Border Style="{StaticResource IconButtonStyle}">
+                                <Image Source="phone.png" WidthRequest="20" HeightRequest="20">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding CallDriverCommand}" />
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Border>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </Border>
+
+                <!-- PRICING SUMMARY -->
+                <Label Text="Pricing Summary" TextColor="{StaticResource PrimaryDark}" FontAttributes="Bold"/>
+                <Border Style="{StaticResource WhiteCard}">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Items Total" Style="{StaticResource SubtextStyle}" Grid.Column="0" HorizontalOptions="Start"/>
+                            <Label Text="{Binding CurrentOrder.TotalPrice}" Style="{StaticResource AddressLabelStyle}" Grid.Column="1" HorizontalOptions="End"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Delivery Fee" Style="{StaticResource SubtextStyle}" Grid.Column="0" HorizontalOptions="Start"/>
+                            <Label Text="{Binding DeliveryFee}" Style="{StaticResource AddressLabelStyle}" Grid.Column="1" HorizontalOptions="End"/>
+                        </Grid>
+                        <BoxView BackgroundColor="{StaticResource BorderColor}" Margin="0,8,0,0"/>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Total" Style="{StaticResource StatusTextStyle}" Grid.Column="0" HorizontalOptions="Start"/>
+                            <Label Text="{Binding TotalPrice}" Style="{StaticResource StatusTextStyle}" Grid.Column="1" HorizontalOptions="End"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:FloatingTabBar
+            Margin="0,20,0,0"
+            AbsoluteLayout.LayoutBounds="0.5,1,1,76"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+            ZIndex="1000" />
+
+    </AbsoluteLayout>
+</ContentPage>
