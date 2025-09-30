@@ -1,9 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-
-    <!--  COLORS  -->
-
+    <!--  ===== Palette (keeps your keys) =====  -->
     <Color x:Key="PrimaryDark">#6A3DFF</Color>
     <Color x:Key="Primary">#7B4DFF</Color>
     <Color x:Key="PrimaryLight">#BDA8FF</Color>
@@ -12,107 +10,85 @@
     <Color x:Key="BackgroundGray">#F5F5F7</Color>
     <Color x:Key="CardWhite">#FFFFFF</Color>
     <Color x:Key="Black">#000000</Color>
+    <Color x:Key="SuccessGreen">#27C469</Color>
+    <Color x:Key="MutedGray">#888888</Color>
 
-
-    <!--  SHADOWS  -->
-
-    <Shadow
-        x:Key="ElevSm"
-        Brush="#000000"
-        Opacity="0.10"
-        Radius="10"
-        Offset="0,4" />
-    <Shadow
-        x:Key="ElevMd"
-        Brush="#000000"
-        Opacity="0.12"
-        Radius="20"
-        Offset="0,8" />
-    <Shadow
-        x:Key="ElevLg"
-        Brush="#000000"
-        Opacity="0.28"
-        Radius="28"
-        Offset="0,14" />
-
-
-    <!--  GRADIENTS  -->
-
-    <LinearGradientBrush x:Key="WalletCardGradient" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Offset="0" Color="#6C3BFF" />
-        <GradientStop Offset="0.65" Color="#b62ff5" />
-        <GradientStop Offset="1" Color="#ce70fa" />
+    <!--  ===== Brushes / Gradients =====  -->
+    <LinearGradientBrush x:Key="Brush.HeaderGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="{StaticResource PrimaryDark}" />
+        <GradientStop Offset="1" Color="#b62ff5" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="WalletCardStrokeGradient" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Offset="0" Color="{StaticResource Gray200}" />
-        <GradientStop Offset="1" Color="{StaticResource Gray400}" />
-    </LinearGradientBrush>
-
-    <LinearGradientBrush x:Key="SectionCardBg" StartPoint="0,0" EndPoint="1,1">
+    <LinearGradientBrush x:Key="Brush.CardBg" StartPoint="0,0" EndPoint="1,1">
         <GradientStop Offset="0" Color="#FFFFFF" />
         <GradientStop Offset="1" Color="#F3EEFF" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="SectionCardStroke" StartPoint="0,0" EndPoint="1,1">
-        <GradientStop Offset="0" Color="#d478ff" />
-        <GradientStop Offset="1" Color="#d478ff" />
-    </LinearGradientBrush>
+    <!--  ===== Purple-tinted Shadows (closest to “gradient shadow” in MAUI) =====  -->
+    <Shadow
+        x:Key="Sh.PurpleSm"
+        Brush="{StaticResource PrimaryLight}"
+        Opacity="0.16"
+        Radius="12"
+        Offset="0,6" />
+    <Shadow
+        x:Key="Sh.PurpleMd"
+        Brush="{StaticResource PrimaryLight}"
+        Opacity="0.18"
+        Radius="20"
+        Offset="0,10" />
+    <Shadow
+        x:Key="Sh.PurpleLg"
+        Brush="{StaticResource PrimaryLight}"
+        Opacity="0.28"
+        Radius="28"
+        Offset="0,14" />
 
-    <!--  Tab label on the floating bar  -->
-    <Style Class="TabLabel" TargetType="Label">
+    <!--  ===== Root typefaces =====  -->
+    <!--  Implicit: every Label uses poppin by default  -->
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="poppin" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+    </Style>
+    <!--  Bold helper when you just want bold quickly  -->
+    <Style Class="bold" TargetType="Label">
         <Setter Property="FontFamily" Value="poppinbold" />
-        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <!--  ===== Typography scales =====  -->
+    <Style Class="h1" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="28" />
         <Setter Property="TextColor" Value="White" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <!--#region HomePage-->
-
-
-    <!--  TYPO STYLES  -->
-    <Style Class="GreetingStyle" TargetType="Label">
-        <Setter Property="FontFamily" Value="poppinbold" />
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryLight}" />
-    </Style>
-
-    <Style Class="NameStyle" TargetType="Label">
-        <Setter Property="FontFamily" Value="poppinbold" />
-        <Setter Property="FontSize" Value="28" />
-        <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
-    </Style>
-
-    <Style Class="BalanceLabelStyle" TargetType="Label">
-        <Setter Property="FontFamily" Value="poppinbold" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
-        <Setter Property="Opacity" Value="0.9" />
-    </Style>
-
-    <Style Class="BalanceAmountStyle" TargetType="Label">
-        <Setter Property="FontFamily" Value="poppinbold" />
-        <Setter Property="FontSize" Value="28" />
-        <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
-    </Style>
-
-    <Style Class="SectionTitleStyle" TargetType="Label">
+    <Style Class="h2" TargetType="Label">
         <Setter Property="FontFamily" Value="poppinbold" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="TextColor" Value="{StaticResource Black}" />
     </Style>
 
-    <Style Class="ViewAllLinkStyle" TargetType="Label">
-        <Setter Property="FontFamily" Value="poppinbold" />
+    <Style Class="body" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppin" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
+        <Setter Property="TextColor" Value="#666" />
     </Style>
 
-    <!--  Circular icon chip (bell)  -->
-    <Style Class="IconChip" TargetType="Border">
+    <Style Class="caption" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppin" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextColor" Value="#8C8C8C" />
+    </Style>
+
+    <!--  ===== Reusable components =====  -->
+
+    <!--#region HomePage-->
+
+
+    <!--  Rounded translucent icon chip (bell)  -->
+    <Style Class="icon-chip" TargetType="Border">
         <Setter Property="WidthRequest" Value="44" />
         <Setter Property="HeightRequest" Value="44" />
-        <Setter Property="StrokeThickness" Value="1" />
         <Setter Property="StrokeShape" Value="RoundRectangle 999" />
         <Setter Property="Background">
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -120,81 +96,83 @@
                 <GradientStop Offset="1" Color="#FFFFFF10" />
             </LinearGradientBrush>
         </Setter>
-        <Setter Property="Stroke" Value="{StaticResource WalletCardStrokeGradient}" />
-        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleSm}" />
         <Setter Property="HorizontalOptions" Value="End" />
         <Setter Property="VerticalOptions" Value="Start" />
     </Style>
 
-    <!--  Wallet card  -->
-    <Style Class="WalletCard" TargetType="Border">
-        <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 26" />
-        <Setter Property="Background" Value="{StaticResource WalletCardGradient}" />
-        <Setter Property="Stroke" Value="{StaticResource WalletCardStrokeGradient}" />
-        <Setter Property="Shadow" Value="{StaticResource ElevLg}" />
-        <Setter Property="Padding" Value="20" />
-    </Style>
-
-    <!--  Section wrapper (Recent Activity)  -->
-    <Style Class="SectionCard" TargetType="Border">
-        <Setter Property="StrokeThickness" Value="1" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 22" />
-        <Setter Property="Background" Value="{StaticResource SectionCardBg}" />
-        <Setter Property="Stroke" Value="{StaticResource SectionCardStroke}" />
-        <Setter Property="Shadow" Value="{StaticResource ElevMd}" />
+    <!--  Big section “card”  -->
+    <Style Class="card" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 24" />
+        <Setter Property="Background" Value="{StaticResource Brush.CardBg}" />
         <Setter Property="Padding" Value="16" />
+        <Setter Property="Margin" Value="20,10" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleLg}" />
     </Style>
 
-    <!--  Activity list item  -->
-    <Style Class="ActivityItemStyle" TargetType="Border">
-        <Setter Property="StrokeThickness" Value="0" />
-        <Setter Property="Background" Value="#FFFFFF" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
-        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
-        <Setter Property="Margin" Value="0,0,0,10" />
-        <Setter Property="Padding" Value="0" />
+    <!--  Primary pill (gradient)  -->
+    <Style Class="pill-primary" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 22" />
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="Background" Value="{StaticResource Brush.CardBg}" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleMd}" />
     </Style>
-
-    <!--  Round icon bg in each row  -->
-    <Style Class="ActivityIconCircle" TargetType="Border">
-        <Setter Property="WidthRequest" Value="40" />
-        <Setter Property="HeightRequest" Value="40" />
-        <Setter Property="StrokeThickness" Value="0" />
-        <Setter Property="StrokeShape" Value="RoundRectangle 999" />
-        <Setter Property="Margin" Value="0,0,12,0" />
-    </Style>
-
-    <!--  Primary ghost card button (Add Order)  -->
-    <Style Class="AddOrderButtonStyle" TargetType="Button">
-        <Setter Property="CornerRadius" Value="18" />
-        <Setter Property="Padding" Value="16,14" />
+    <Style Class="pill-primary-text" TargetType="Label">
         <Setter Property="FontFamily" Value="poppinbold" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryDark}" />
-        <Setter Property="Background">
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Offset="0" Color="#EEE7FF" />
-                <GradientStop Offset="1" Color="#FFFFFF" />
-            </LinearGradientBrush>
-        </Setter>
-        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="White" />
     </Style>
 
-    <!--  Neutral outline button (Track Order)  -->
-    <Style Class="TrackOrderButtonStyle" TargetType="Button">
-        <Setter Property="CornerRadius" Value="18" />
-        <Setter Property="Padding" Value="16,14" />
+    <!--  Secondary pill (white)  -->
+    <Style Class="pill-secondary" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 22" />
+        <Setter Property="Padding" Value="16,12" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleSm}" />
+    </Style>
+    <Style Class="pill-secondary-text" TargetType="Label">
         <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="TextColor" Value="{StaticResource Black}" />
-        <Setter Property="BackgroundColor" Value="#FFFFFF" />
-        <Setter Property="BorderColor" Value="#E6E1FF" />
-        <Setter Property="BorderWidth" Value="1" />
-        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+    </Style>
+
+    <!--  Chips  -->
+    <Style Class="chip" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleSm}" />
+        <Setter Property="Margin" Value="4" />
+    </Style>
+
+    <!--  Small circular icon button  -->
+    <Style Class="icon-button" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 999" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Background" Value="#F3EEFF" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleSm}" />
+    </Style>
+
+    <!--  Avatar ring  -->
+    <Style Class="avatar-ring" TargetType="Border">
+        <Setter Property="StrokeShape" Value="RoundRectangle 999" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleSm}" />
+    </Style>
+    <Style Class="avatar" TargetType="Image">
+        <Setter Property="WidthRequest" Value="72" />
+        <Setter Property="HeightRequest" Value="72" />
+        <Setter Property="Aspect" Value="AspectFill" />
+    </Style>
+
+    <!--  Section header row  -->
+    <Style Class="section-header" TargetType="Grid">
+        <Setter Property="ColumnDefinitions" Value="*,Auto" />
+        <Setter Property="Margin" Value="4,0,4,8" />
     </Style>
 
     <!--#endregion-->
 
-    <!--#region OrdersPage-->
-    <!--  hon ziiiid anwaryoooooo  -->
-    <!--#endregion-->
 </ResourceDictionary>

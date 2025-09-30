@@ -17,12 +17,12 @@
         VerticalOptions="Center"
         WidthRequest="420">
         <Border.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                <GradientStop Offset="0" Color="#ce70fa" />
-                <GradientStop Offset="0.65" Color="#d993fa" />
-                <GradientStop Offset="1" Color="#edd7f7" />
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#FFFFFF" />
+                <GradientStop Offset="1" Color="#E6D8FF" />
             </LinearGradientBrush>
         </Border.Background>
+
 
         <Grid
             ColumnDefinitions="*,*,*,*,*"
