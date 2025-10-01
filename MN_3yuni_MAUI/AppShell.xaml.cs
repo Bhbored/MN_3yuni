@@ -1,4 +1,6 @@
-﻿namespace MN_3yuni_MAUI
+﻿using MN_3yuni_MAUI.MVVM.Views;
+
+namespace MN_3yuni_MAUI
 {
     public partial class AppShell : Shell
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
           
-            Routing.RegisterRoute(nameof(MVVM.Views.OrderDetails), typeof(MVVM.Views.OrderDetails));
+            Routing.RegisterRoute(nameof(OrderDetails), typeof(OrderDetails));
         }
     }
 }

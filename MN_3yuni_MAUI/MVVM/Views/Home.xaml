@@ -218,7 +218,12 @@
                     </Border>
 
                     <!--  Recent drivers  -->
-                    <Border Background="{StaticResource Brush.CardBg}" StyleClass="card">
+                    <Border
+                        Background="{StaticResource Brush.CardBg}"
+                        Shadow="{StaticResource Sh.PurpleSm}"
+                        Stroke="{StaticResource Gray100}"
+                        StrokeThickness="1"
+                        StyleClass="card">
                         <VerticalStackLayout Spacing="8">
                             <Grid StyleClass="section-header">
                                 <Label StyleClass="h2" Text="Recent drivers" />
@@ -276,7 +281,12 @@
                     </Border>
 
                     <!--  Saved addresses  -->
-                    <Border Background="{StaticResource Brush.CardBg}" StyleClass="card">
+                    <Border
+                        Background="{StaticResource Brush.CardBg}"
+                        Shadow="{StaticResource Sh.PurpleSm}"
+                        Stroke="{StaticResource Gray100}"
+                        StrokeThickness="1"
+                        StyleClass="card">
                         <VerticalStackLayout Spacing="8">
                             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
                                 <Border BackgroundColor="#EEE7FF" StyleClass="icon-button">

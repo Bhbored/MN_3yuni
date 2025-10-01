@@ -18,6 +18,10 @@
         <GradientStop Offset="0" Color="{StaticResource PrimaryDark}" />
         <GradientStop Offset="1" Color="#b62ff5" />
     </LinearGradientBrush>
+    <LinearGradientBrush x:Key="Brush.CardBg" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#FFFFFF" />
+        <GradientStop Offset="1" Color="#F3EEFF" />
+    </LinearGradientBrush>
 
     <!--  SHADOWS  -->
 
@@ -37,7 +41,7 @@
     <Shadow
         x:Key="Sh.PurpleLg"
         Brush="{StaticResource PrimaryLight}"
-        Opacity="0.28"
+        Opacity="0.24"
         Radius="28"
         Offset="0,14" />
 
@@ -105,14 +109,14 @@
         <Setter Property="Background" Value="{StaticResource Brush.CardBg}" />
         <Setter Property="Padding" Value="16" />
         <Setter Property="Margin" Value="20,10" />
-        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleLg}" />
+        <Setter Property="Shadow" Value="{StaticResource Sh.PurpleMd}" />
     </Style>
 
     <!--  Primary pill (gradient)  -->
     <Style Class="pill-primary" TargetType="Border">
         <Setter Property="StrokeShape" Value="RoundRectangle 22" />
         <Setter Property="Padding" Value="16,12" />
-        <Setter Property="Background" Value="{StaticResource Brush.CardBg}" />
+        <Setter Property="Background" Value="{StaticResource Brush.HeaderGradient}" />
         <Setter Property="Shadow" Value="{StaticResource Sh.PurpleMd}" />
     </Style>
     <Style Class="pill-primary-text" TargetType="Label">
@@ -147,7 +151,7 @@
     <Style Class="icon-button" TargetType="Border">
         <Setter Property="StrokeShape" Value="RoundRectangle 999" />
         <Setter Property="Padding" Value="10" />
-        <Setter Property="Background" Value="#F3EEFF" />
+        <Setter Property="Background" Value="White" />
         <Setter Property="Shadow" Value="{StaticResource Sh.PurpleSm}" />
     </Style>
 
@@ -173,6 +177,140 @@
     <!--#endregion-->
 
     <!--#region OrdersPage-->
-    <!--  hon ziiiid anwaryoooooo  -->
+    <Style x:Key="SectionHeaderStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource Gray500}" />
+        <Setter Property="TextTransform" Value="Uppercase" />
+    </Style>
+
+    <!--  Order Item Card  -->
+    <Style x:Key="OrderItemCard" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource CardWhite}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="Padding" Value="16,2" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+    </Style>
+
+    <!--  Delivery Row  -->
+    <Style x:Key="DeliveryRow" TargetType="HorizontalStackLayout">
+        <Setter Property="Spacing" Value="16" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="DeliveryIconCircle" TargetType="Border">
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="BackgroundColor" Value="{StaticResource CardWhite}" />
+
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 999" />
+
+        <Setter Property="Margin" Value="0,0,12,0" />
+    </Style>
+
+    <!--  Address Label  -->
+    <Style x:Key="AddressLabelStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+    </Style>
+
+    <!--  Subtext (Street/Price/Role)  -->
+    <Style x:Key="SubtextStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinregular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#666666" />
+    </Style>
+
+    <!--  Status Card  -->
+    <Style x:Key="WhiteCard" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource CardWhite}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+    </Style>
+
+    <!--  Status Icon Circle  -->
+    <Style
+        x:Key="StatusIconCircle"
+        BasedOn="{StaticResource DeliveryIconCircle}"
+        TargetType="Border" />
+
+    <!--  Status Text Style  -->
+    <Style x:Key="StatusTextStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+    </Style>
+
+    <!--  Status Date Style  -->
+    <Style x:Key="StatusDateStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinregular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#666666" />
+    </Style>
+
+    <!--  Track Order Button  -->
+
+    <Style x:Key="TrackOrderButtonStyle" TargetType="Button">
+        <Setter Property="CornerRadius" Value="16" />
+        <Setter Property="Padding" Value="12,6" />
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextColor" Value="{StaticResource CardWhite}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="HeightRequest" Value="32" />
+
+        <Setter Property="HorizontalOptions" Value="End" />
+    </Style>
+
+    <!--  Driver Card  -->
+    <Style x:Key="DriverCard" TargetType="Border">
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource CardWhite}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 16" />
+        <Setter Property="Shadow" Value="{StaticResource ElevSm}" />
+        <Setter Property="Padding" Value="16" />
+        <Setter Property="Margin" Value="0,0,0,16" />
+    </Style>
+
+    <!--  Driver Name Style  -->
+    <Style x:Key="DriverNameStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="TextColor" Value="{StaticResource Black}" />
+    </Style>
+
+    <!--  Driver Rating Style  -->
+    <Style x:Key="DriverRatingStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinbold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource AccentRed}" />
+    </Style>
+
+    <!--  Driver Review Count  -->
+    <Style x:Key="DriverReviewCountStyle" TargetType="Label">
+        <Setter Property="FontFamily" Value="poppinregular" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#666666" />
+    </Style>
+
+    <!--  Icon Button Style (Chat/Call)  -->
+    <Style x:Key="IconButtonStyle" TargetType="Border">
+        <Setter Property="WidthRequest" Value="44" />
+        <Setter Property="HeightRequest" Value="44" />
+        <Setter Property="StrokeThickness" Value="0" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 22" />
+        <Setter Property="BackgroundColor" Value="#F5F5F7" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
     <!--#endregion-->
+
 </ResourceDictionary>
