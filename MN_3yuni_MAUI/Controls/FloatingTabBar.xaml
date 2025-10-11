@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MN_3yuni_MAUI.Controls.FloatingTabBar"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MN_3yuni_MAUI.Controls"
+    x:DataType="controls:FloatingTabBar">
+
+    <Border
+        Margin="16,0,16,0"
+        Padding="14"
+        HorizontalOptions="Center"
+        Shadow="{StaticResource Sh.PurpleLg}"
+        Stroke="{StaticResource Gray100}"
+        StrokeShape="RoundRectangle 28"
+        StrokeThickness="1"
+        VerticalOptions="Center"
+        WidthRequest="420">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#FFFFFF" />
+                <GradientStop Offset="1" Color="#E6D8FF" />
+            </LinearGradientBrush>
+        </Border.Background>
+
+
+        <Grid
+            ColumnDefinitions="*,*,*,*,*"
+            HeightRequest="56"
+            VerticalOptions="Center">
+
+            <!--  Home  -->
+            <VerticalStackLayout
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                Spacing="2"
+                VerticalOptions="Center">
+                <Image
+                    HeightRequest="22"
+                    Source="home.png"
+                    WidthRequest="22" />
+                <Label StyleClass="TabLabel" Text="Home" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="//Home" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+
+            <!--  Orders  -->
+            <VerticalStackLayout
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Spacing="2"
+                VerticalOptions="Center">
+                <Image
+                    HeightRequest="22"
+                    Source="orders.png"
+                    WidthRequest="22" />
+                <Label StyleClass="TabLabel" Text="Orders" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="//OrderPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+
+            <!--  New (center FAB)  -->
+            <Border
+                Grid.Column="2"
+                Margin="0,0,0,10"
+                HeightRequest="48"
+                HorizontalOptions="Center"
+                Stroke="{StaticResource Gray100}"
+                StrokeShape="RoundRectangle 999"
+                StrokeThickness="1"
+                WidthRequest="48">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#FFFFFF" />
+                        <GradientStop Offset="1" Color="#F3EEFF" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Image
+                    HeightRequest="24"
+                    HorizontalOptions="Center"
+                    Source="plus.png"
+                    VerticalOptions="Center"
+                    WidthRequest="24" />
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="//OrderPage" />
+                </Border.GestureRecognizers>
+            </Border>
+
+            <!--  Chat  -->
+            <VerticalStackLayout
+                Grid.Column="3"
+                HorizontalOptions="Center"
+                Spacing="2"
+                VerticalOptions="Center">
+                <Image
+                    HeightRequest="22"
+                    Source="chat.png"
+                    WidthRequest="22" />
+                <Label StyleClass="TabLabel" Text="Chat" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="//ChatPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+
+            <!--  Wallet  -->
+            <VerticalStackLayout
+                Grid.Column="4"
+                HorizontalOptions="Center"
+                Spacing="2"
+                VerticalOptions="Center">
+                <Image
+                    HeightRequest="30"
+                    Source="wallet.png"
+                    WidthRequest="30" />
+                <Label StyleClass="TabLabel" Text="Wallet" />
+                <VerticalStackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="//WalletPage" />
+                </VerticalStackLayout.GestureRecognizers>
+            </VerticalStackLayout>
+
+        </Grid>
+    </Border>
+</ContentView>

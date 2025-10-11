@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MN_3yuni_MAUI.MVVM.Views.OrderPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MN_3yuni_MAUI.Controls"
+    BackgroundColor="{StaticResource BackgroundGray}">
+
+    <AbsoluteLayout>
+        <Grid
+            Margin="0,0,0,76"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Purple Header Section with Curved Shape  -->
+            <Grid Grid.Row="0" RowDefinitions="Auto,80">
+
+                <BoxView
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Background="{StaticResource Brush.HeaderGradient}"
+                    HeightRequest="350" />
+
+                <Path
+                    Grid.Row="1"
+                    Aspect="Fill"
+                    Data="M 0,20 Q 345,0 690,20 L 690,80 L 0,80 Z"
+                    Fill="{StaticResource BackgroundGray}"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="End" />
+
+                <VerticalStackLayout
+                    Grid.Row="0"
+                    Margin="20,40,20,16"
+                    Spacing="16">
+                    <Border
+                        Background="White"
+                        HeightRequest="50"
+                        StrokeShape="RoundRectangle 25"
+                        StrokeThickness="0">
+                        <Grid
+                            Padding="15,0"
+                            ColumnDefinitions="Auto,*"
+                            ColumnSpacing="10">
+                            <Image
+                                Grid.Column="0"
+                                HeightRequest="20"
+                                Source="pin.png"
+                                VerticalOptions="Center"
+                                WidthRequest="20" />
+                            <Entry
+                                Grid.Column="1"
+                                Background="Transparent"
+                                FontFamily="poppinregular"
+                                FontSize="14"
+                                Placeholder="Search orders..."
+                                PlaceholderColor="{StaticResource Gray200}"
+                                TextColor="{StaticResource Black}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!--  Filter and Sort Buttons  -->
+                    <Grid ColumnDefinitions="Auto,Auto,*,Auto,Auto" ColumnSpacing="10">
+                        <Border
+                            Grid.Column="0"
+                            Padding="15,10"
+                            Background="White"
+                            StrokeShape="RoundRectangle 20"
+                            StrokeThickness="0">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label
+                                    FontFamily="poppinmedium"
+                                    FontSize="14"
+                                    Text="Filter"
+                                    TextColor="{StaticResource Primary}"
+                                    VerticalOptions="Center" />
+                                <Path
+                                    Margin="0,0,0,0"
+                                    Data="M7,6h10l-5.01,6.3L7,6z M4.25,5.61C6.27,8.2,10,13,10,13v6c0,0.55,0.45,1,1,1h2c0.55,0,1-0.45,1-1v-6 c0,0,3.72-4.8,5.74-7.39C20.25,4.95,19.78,4,18.95,4H5.04C4.21,4,3.74,4.95,4.25,5.61z"
+                                    Fill="{StaticResource Primary}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Column="1"
+                            Padding="15,10"
+                            Background="White"
+                            StrokeShape="RoundRectangle 20"
+                            StrokeThickness="0">
+                            <HorizontalStackLayout Spacing="8">
+                                <Label
+                                    FontFamily="poppinmedium"
+                                    FontSize="14"
+                                    Text="Newest"
+                                    TextColor="{StaticResource Primary}"
+                                    VerticalOptions="Center" />
+                                <Path
+                                    Data="M7 10l5 5 5-5z"
+                                    Fill="{StaticResource Primary}"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center"
+                                    WidthRequest="16" />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <Border
+                            Grid.Column="3"
+                            Padding="12"
+                            Background="White"
+                            HeightRequest="44"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0"
+                            WidthRequest="44">
+                            <Path
+                                Aspect="Uniform"
+                                Data="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"
+                                Fill="{StaticResource Primary}"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                        </Border>
+
+                        <Border
+                            Grid.Column="4"
+                            Padding="12"
+                            Background="White"
+                            HeightRequest="44"
+                            StrokeShape="RoundRectangle 12"
+                            StrokeThickness="0"
+                            WidthRequest="44">
+                            <Path
+                                Aspect="Uniform"
+                                Data="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"
+                                Fill="{StaticResource Primary}"
+                                HeightRequest="20"
+                                WidthRequest="20" />
+                        </Border>
+                    </Grid>
+
+                    <!--  Upcoming / Past Orders Tabs  -->
+                    <HorizontalStackLayout
+                        Margin="0,10,0,0"
+                        HorizontalOptions="Center"
+                        Spacing="0">
+                        <Border
+                            Padding="20,8"
+                            Background="Transparent"
+                            StrokeThickness="0">
+                            <Label
+                                FontFamily="poppinbold"
+                                FontSize="16"
+                                Text="Completed"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsUpcomingSelected}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding IsUpcomingSelected}"
+                                        TargetType="Label"
+                                        Value="False">
+                                        <Setter Property="TextColor" Value="{StaticResource Gray200}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectUpcomingCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+
+                        <Border
+                            Padding="20,8"
+                            Background="Transparent"
+                            StrokeThickness="0">
+                            <Label
+                                FontFamily="poppinbold"
+                                FontSize="16"
+                                Text="Cancelled"
+                                VerticalOptions="Center">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding IsUpcomingSelected}"
+                                        TargetType="Label"
+                                        Value="False">
+                                        <Setter Property="TextColor" Value="White" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding IsUpcomingSelected}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource Gray200}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectPastCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Border>
+                    </HorizontalStackLayout>
+
+                    <!--  Underline for selected tab  -->
+                    <BoxView
+                        Background="White"
+                        CornerRadius="1.5"
+                        HeightRequest="3"
+                        HorizontalOptions="Center"
+                        TranslationX="{Binding TabUnderlineTranslation}"
+                        WidthRequest="100">
+                        <BoxView.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsUpcomingSelected}"
+                                TargetType="BoxView"
+                                Value="True">
+                                <Setter Property="TranslationX" Value="-60" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding IsUpcomingSelected}"
+                                TargetType="BoxView"
+                                Value="False">
+                                <Setter Property="TranslationX" Value="60" />
+                            </DataTrigger>
+                        </BoxView.Triggers>
+                    </BoxView>
+
+                </VerticalStackLayout>
+            </Grid>
+
+            <!--  Order List  -->
+            <Border
+                Grid.Row="1"
+                Margin="15,-50,15,0"
+                Background="Transparent"
+                StrokeThickness="0">
+                <ScrollView Margin="0" VerticalScrollBarVisibility="Never">
+                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding DisplayedOrders}" Spacing="15">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Padding="20"
+                                    Background="White"
+                                    Stroke="Transparent"
+                                    StrokeShape="RoundRectangle 20"
+                                    StrokeThickness="0">
+                                    <Border.Shadow>
+                                        <Shadow
+                                            Brush="{StaticResource Gray100}"
+                                            Opacity="0.1"
+                                            Radius="8"
+                                            Offset="0,4" />
+                                    </Border.Shadow>
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.GoToOrderDetailsCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding}" />
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="12">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <Label
+                                                Grid.Column="0"
+                                                FontFamily="poppinregular"
+                                                FontSize="14"
+                                                Text="{Binding OrderNumber}"
+                                                TextColor="{StaticResource Gray200}" />
+                                            <Label
+                                                Grid.Column="1"
+                                                FontFamily="poppinbold"
+                                                FontSize="18"
+                                                Text="{Binding TotalPrice}"
+                                                TextColor="{StaticResource PrimaryDark}" />
+                                        </Grid>
+                                        <Label
+                                            FontFamily="poppinbold"
+                                            FontSize="18"
+                                            Text="{Binding RestaurantInfo}"
+                                            TextColor="{StaticResource Black}" />
+                                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                            <Image
+                                                HeightRequest="32"
+                                                Source="expressdelivery.png"
+                                                WidthRequest="32" />
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="4"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontFamily="poppinbold"
+                                                    FontSize="16"
+                                                    Text="{Binding Status}"
+                                                    TextColor="{StaticResource Primary}" />
+                                                <Label
+                                                    FontFamily="poppinregular"
+                                                    FontSize="13"
+                                                    LineBreakMode="TailTruncation"
+                                                    MaxLines="1"
+                                                    Text="{Binding Address}"
+                                                    TextColor="{StaticResource Gray200}" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Border>
+
+        </Grid>
+
+        <!--  Floating Tab Bar  -->
+        <controls:FloatingTabBar
+            Margin="0,20,0,0"
+            AbsoluteLayout.LayoutBounds="0.5,1,1,76"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+            ZIndex="1000" />
+
+    </AbsoluteLayout>
+</ContentPage>

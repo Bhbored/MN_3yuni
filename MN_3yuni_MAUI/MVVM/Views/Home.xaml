@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MN_3yuni_MAUI.MVVM.Views.Home"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MN_3yuni_MAUI.Controls"
+    xmlns:converters="clr-namespace:MN_3yuni_MAUI.Converters"
+    xmlns:models="clr-namespace:Shared.Models;assembly=Shared"
+    BackgroundColor="{StaticResource BackgroundGray}">
+
+    <!--  resources: merge your custom styles + 4 converters  -->
+    <ContentPage.Resources>
+        <converters:TransactionStatusToIconConverter x:Key="TxIcon" />
+        <converters:TransactionStatusToColorConverter x:Key="TxRowBg" />
+        <converters:TransactionStatusToDescriptionConverter x:Key="TxDesc" />
+        <converters:TransactionStatusTextColorConverter x:Key="TxAmountColor" />
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            RowDefinitions="Auto,*">
+
+            <!--  ===== Row 0: header (purple gradient) =====  -->
+            <Border
+                Grid.Row="0"
+                Margin="-5,-5,-5,0"
+                Background="{StaticResource Brush.HeaderGradient}"
+                HeightRequest="158"
+                Shadow="{StaticResource Sh.PurpleLg}"
+                StrokeShape="RoundRectangle 0,0,50,50">
+                <Grid Padding="20,28,20,0" RowDefinitions="Auto,Auto">
+
+                    <!--  top bar  -->
+                    <Grid
+                        Grid.Row="0"
+                        ColumnDefinitions="Auto,*,Auto"
+                        HeightRequest="100">
+                        <Label
+                            FontSize="35"
+                            Text="≡"
+                            TextColor="White"
+                            VerticalTextAlignment="Start" />
+                        <VerticalStackLayout
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start">
+                            <Label StyleClass="h1" Text="Welcome back," />
+                            <Label
+                                FontSize="18"
+                                StyleClass="h1"
+                                Text="Anwar" />
+                        </VerticalStackLayout>
+                        <Border
+                            Grid.Column="2"
+                            Background="White"
+                            HeightRequest="35"
+                            StrokeShape="RoundRectangle 999"
+                            VerticalOptions="Start"
+                            WidthRequest="35">
+                            <Image
+                                Aspect="AspectFit"
+                                HeightRequest="30"
+                                Source="bell.png"
+                                WidthRequest="30" />
+                        </Border>
+
+                    </Grid>
+                    <Border
+                        Grid.Row="1"
+                        Margin="0,-23,0,0"
+                        Background="White"
+                        StrokeShape="RoundRectangle 50">
+                        <HorizontalStackLayout>
+                            <SearchBar Background="Transparent" Placeholder="where to deliver" />
+                        </HorizontalStackLayout>
+                    </Border>
+
+                </Grid>
+            </Border>
+
+            <!--  ===== Row 1: content =====  -->
+            <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+                <VerticalStackLayout Padding="0,6,0,70">
+                    <!--  action pills  -->
+                    <Grid
+                        Padding="20,0,20,10"
+                        ColumnDefinitions="*,Auto,*"
+                        ColumnSpacing="12">
+                        <Border
+                            Background="{StaticResource Brush.HeaderGradient}"
+                            Shadow="{StaticResource Sh.PurpleLg}"
+                            StyleClass="pill-primary">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Path
+                                    Margin="0,0,0,5"
+                                    Data="M12 5v14M5 12h14"
+                                    HeightRequest="18"
+                                    Stroke="White"
+                                    StrokeLineCap="Round"
+                                    StrokeLineJoin="Round"
+                                    StrokeThickness="2"
+                                    VerticalOptions="Center"
+                                    WidthRequest="18" />
+                                <Label
+                                    Grid.Column="1"
+                                    StyleClass="pill-primary-text"
+                                    Text="New Order"
+                                    TextColor="White"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="2" StyleClass="pill-secondary">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Path
+                                    Margin="0,0,0,5"
+                                    Data="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20zm0 4a6 6 0 1 1 0 12 6 6 0 1 1 0-12zm0 3a3 3 0 1 0 0 6 3 3 0 1 0 0-6z"
+                                    Fill="{StaticResource Primary}"
+                                    HeightRequest="18"
+                                    WidthRequest="18" />
+                                <Label
+                                    Grid.Column="1"
+                                    StyleClass="pill-secondary-text"
+                                    Text="Track Orders"
+                                    VerticalTextAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <Border
+                        Background="{StaticResource Brush.CardBg}"
+                        Shadow="{StaticResource ElevSm}"
+                        Stroke="{StaticResource Gray100}"
+                        StrokeThickness="2"
+                        StyleClass="card">
+                        <VerticalStackLayout Spacing="10">
+                            <Grid StyleClass="section-header">
+                                <Label StyleClass="h2" Text="Active order" />
+                                <Label
+                                    Grid.Column="1"
+                                    StyleClass="bold"
+                                    Text="ETA • 5 min"
+                                    TextColor="{StaticResource PrimaryDark}" />
+                            </Grid>
+
+                            <Label StyleClass="body" Text="ABC Bakery  •  #12345" />
+                            <!--  progress  -->
+                            <Grid
+                                ColumnDefinitions="*,*,*"
+                                ColumnSpacing="5"
+                                HeightRequest="30">
+                                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                    <Border
+                                        Margin="0,0,0,10"
+                                        Background="{StaticResource Brush.HeaderGradient}"
+                                        HeightRequest="10"
+                                        StrokeShape="RoundRectangle 30"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Start"
+                                        StyleClass="caption"
+                                        Text="Confirmed"
+                                        TextColor="#b62ff5" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Border
+                                        Margin="0,0,0,10"
+                                        Background="{StaticResource Brush.HeaderGradient}"
+                                        HeightRequest="10"
+                                        StrokeShape="RoundRectangle 30"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Start"
+                                        StyleClass="caption"
+                                        Text="Driver selected"
+                                        TextColor="#b62ff5" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center">
+                                    <Border
+                                        Margin="0,0,0,10"
+                                        Background="#E8E1FF"
+                                        HeightRequest="10"
+                                        StrokeShape="RoundRectangle 30"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        FontAttributes="Bold"
+                                        HorizontalOptions="Start"
+                                        StyleClass="caption"
+                                        Text="In transit" />
+                                </VerticalStackLayout>
+                            </Grid>
+
+                            <!--  driver chip  -->
+                            <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+                                <Border StyleClass="avatar-ring">
+                                    <Image Source="avatar10.png" StyleClass="avatar" />
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                    <Label StyleClass="bold" Text="Bilal" />
+                                    <Label StyleClass="body" Text="Motorbike • 2 min away" />
+                                </VerticalStackLayout>
+                                <Border
+                                    Grid.Column="2"
+                                    HeightRequest="70"
+                                    StyleClass="icon-button"
+                                    WidthRequest="70">
+                                    <Image
+                                        Aspect="AspectFit"
+                                        HeightRequest="18"
+                                        Source="chat.png"
+                                        WidthRequest="18" />
+                                </Border>
+                                <Border
+                                    Grid.Column="3"
+                                    HeightRequest="70"
+                                    StyleClass="icon-button"
+                                    WidthRequest="70">
+                                    <Image
+                                        HeightRequest="18"
+                                        Source="phone.png"
+                                        WidthRequest="18" />
+                                </Border>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--  Recent drivers  -->
+                    <Border
+                        Background="{StaticResource Brush.CardBg}"
+                        Shadow="{StaticResource Sh.PurpleLg}"
+                        Stroke="{StaticResource Gray100}"
+                        StrokeThickness="2"
+                        StyleClass="card">
+                        <VerticalStackLayout Spacing="8">
+                            <Grid StyleClass="section-header">
+                                <Label StyleClass="h2" Text="Recent drivers" />
+                                <Label
+                                    Grid.Column="1"
+                                    StyleClass="bold"
+                                    Text="More"
+                                    TextColor="{StaticResource PrimaryDark}" />
+                            </Grid>
+
+                            <CollectionView
+                                HeightRequest="148"
+                                ItemsSource="{Binding RecentDrivers}"
+                                SelectionMode="None">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="16" Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.HorizontalScrollBarVisibility>Never</CollectionView.HorizontalScrollBarVisibility>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid WidthRequest="96">
+                                            <VerticalStackLayout HorizontalOptions="Center" Spacing="6">
+                                                <Grid>
+                                                    <Border StyleClass="avatar-ring">
+                                                        <Image Source="{Binding AvatarUrl}" StyleClass="avatar" />
+                                                    </Border>
+                                                    <!--  online dot  -->
+                                                    <Border
+                                                        Margin="2"
+                                                        Padding="0"
+                                                        BackgroundColor="{StaticResource SuccessGreen}"
+                                                        HeightRequest="14"
+                                                        HorizontalOptions="End"
+                                                        StrokeShape="RoundRectangle 999"
+                                                        VerticalOptions="End"
+                                                        WidthRequest="14" />
+                                                </Grid>
+                                                <Label
+                                                    FontSize="14"
+                                                    HorizontalTextAlignment="Center"
+                                                    StyleClass="bold"
+                                                    Text="{Binding Name}" />
+                                                <HorizontalStackLayout HorizontalOptions="Center" Spacing="4">
+                                                    <Label FontSize="12" Text="⭐" />
+                                                    <Label FontSize="12" Text="{Binding Rating}" />
+                                                    <Label FontSize="12" Text="•" />
+                                                    <Label FontSize="12" Text="{Binding Vehicle}" />
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--  Saved addresses  -->
+                    <Border
+                        Background="{StaticResource Brush.CardBg}"
+                        Shadow="{StaticResource Sh.PurpleLg}"
+                        Stroke="{StaticResource Gray100}"
+                        StrokeThickness="2"
+                        StyleClass="card">
+                        <VerticalStackLayout Spacing="8">
+                            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
+                                <Border BackgroundColor="#EEE7FF" StyleClass="icon-button">
+                                    <Image
+                                        HeightRequest="18"
+                                        Source="pin.png"
+                                        WidthRequest="18" />
+                                </Border>
+                                <Label
+                                    Grid.Column="1"
+                                    StyleClass="h2"
+                                    Text="Saved addresses" />
+                                <Label
+                                    Grid.Column="2"
+                                    StyleClass="bold"
+                                    Text="View all"
+                                    TextColor="{StaticResource PrimaryDark}" />
+                            </Grid>
+
+                            <CollectionView ItemsSource="{Binding SavedAddresses}" SelectionMode="None">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="3" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border StyleClass="chip">
+                                            <Label Text="{Binding Name}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--  Recent activity  -->
+                    <Border
+                        Background="{StaticResource Brush.CardBg}"
+                        HeightRequest="450"
+                        Shadow="{StaticResource Sh.PurpleLg}"
+                        Stroke="{StaticResource Gray100}"
+                        StrokeThickness="2"
+                        StyleClass="card">
+                        <Grid RowDefinitions="Auto,*">
+                            <VerticalStackLayout Grid.Row="0" Spacing="8">
+                                <Grid StyleClass="section-header">
+                                    <Label StyleClass="h2" Text="Recent activity" />
+                                    <Label
+                                        Grid.Column="1"
+                                        StyleClass="bold"
+                                        Text="View All"
+                                        TextColor="{StaticResource PrimaryDark}" />
+                                </Grid>
+                            </VerticalStackLayout>
+                            <CollectionView
+                                Grid.Row="1"
+                                ItemsSource="{Binding Transactions}"
+                                SelectionMode="None"
+                                VerticalScrollBarVisibility="Never">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:WalletTransaction">
+                                        <Border
+                                            Margin="0,0,0,10"
+                                            Padding="0"
+                                            Background="{StaticResource Brush.CardBg}"
+                                            StrokeShape="RoundRectangle 30">
+                                            <Grid Padding="14" ColumnDefinitions="Auto,*,Auto">
+                                                <!--  icon  -->
+                                                <Border
+                                                    Margin="0,0,10,0"
+                                                    Padding="8"
+                                                    Background="{Binding Status, Converter={StaticResource TxRowBg}}"
+                                                    HeightRequest="50"
+                                                    StrokeShape="RoundRectangle 999"
+                                                    StyleClass="icon-button"
+                                                    WidthRequest="50">
+                                                    <Label
+                                                        HorizontalOptions="Center"
+                                                        StyleClass="bold"
+                                                        Text="{Binding Status, Converter={StaticResource TxIcon}}"
+                                                        TextColor="White"
+                                                        VerticalOptions="Center" />
+                                                </Border>
+                                                <!--  info  -->
+                                                <VerticalStackLayout
+                                                    Grid.Column="1"
+                                                    Spacing="2"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontSize="16"
+                                                        StyleClass="bold"
+                                                        Text="{Binding Transaction_Type}" />
+                                                    <Label
+                                                        StyleClass="body"
+                                                        Text="{Binding Status, Converter={StaticResource TxDesc}}"
+                                                        TextColor="#888" />
+                                                </VerticalStackLayout>
+                                                <!--  amount  -->
+                                                <Label
+                                                    Grid.Column="2"
+                                                    FontSize="16"
+                                                    StyleClass="bold"
+                                                    Text="{Binding Amount, StringFormat='{}{0:C}'}"
+                                                    TextColor="{Binding Status, Converter={StaticResource TxAmountColor}}"
+                                                    VerticalOptions="Center" />
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+        <!--  your floating tab bar unchanged  -->
+        <controls:FloatingTabBar
+            Margin="0,20,0,0"
+            AbsoluteLayout.LayoutBounds="0.5,1,1,76"
+            AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"
+            ZIndex="1000" />
+    </AbsoluteLayout>
+</ContentPage>
